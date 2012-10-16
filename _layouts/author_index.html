@@ -1,0 +1,22 @@
+---
+layout: default
+footer: false
+nav: Our Blog
+---
+
+<div id="blog-archives" class="author span9">
+  <h1>Author: {{ page.author }}</h1>
+	{% assign index = true %}
+        {% for post in site.posts %}
+          {% if post.author contains page.author %}
+            {% assign content = post.content %}
+	    <article>
+  	      {% include article_index.html %}
+	    </article>
+          {% endif %}
+	{% endfor %}
+</div>
+
+<div class="sidebar-nav span3">
+  {% include_array blog_index_asides %}
+</div> 
