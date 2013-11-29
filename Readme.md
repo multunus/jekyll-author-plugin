@@ -1,7 +1,8 @@
-#What does it do
+# What does it do
 
 * Create a listing page for "posts bys author".
 * Adds a link to the author for listing
+* Now it supports Octopress!
 
 # How to use
 * Clone the repository

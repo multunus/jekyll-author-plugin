@@ -1,22 +1,25 @@
 ---
-layout: default
+layout: page
 footer: false
-nav: Our Blog
 ---
 
-<div id="blog-archives" class="author span9">
-  <h1>Author: {{ page.author }}</h1>
+<div id="blog-archives" class="author">
+
 	{% assign index = true %}
         {% for post in site.posts %}
           {% if post.author contains page.author %}
+
+            {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
+            {% unless year == this_year %}
+              {% assign year = this_year %}
+              <h2>{{ year }}</h2>
+            {% endunless %}
+
             {% assign content = post.content %}
 	    <article>
-  	      {% include article_index.html %}
+  	      {% include archive_post.html %}
 	    </article>
           {% endif %}
 	{% endfor %}
 </div>
 
-<div class="sidebar-nav span3">
-  {% include_array blog_index_asides %}
-</div> 
