@@ -77,7 +77,7 @@ module Jekyll
                post_authors = [ post_authors ]
           end
           post_authors.each do |author|              
-            self.write_author_index(File.join(dir, author.downcase), author)
+            self.write_author_index(File.join(dir, author.downcase.gsub(' ', '-')), author)
           end
         end
       # Throw an exception if the layout couldn't be found.
