@@ -118,7 +118,7 @@ module Jekyll
                authors = [ authors ]
       end
       authors = authors.map do |author|
-        "<a class='author' href='/#{dir}/#{author.downcase}/'>#{author}</a>"
+        "<a class='author' href='/#{dir}/#{author.downcase.gsub(' ', '-')}/'>#{author}</a>"
       end
       case authors.length
       when 0
