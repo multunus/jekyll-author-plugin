@@ -1,6 +1,6 @@
 # What does it do
 
-* Create a listing page for "posts bys author".
+* Create a listing page for "posts by author".
 * Adds a link to the author for listing
 * Now it supports Octopress!
 
