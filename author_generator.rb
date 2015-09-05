@@ -44,7 +44,7 @@ module Jekyll
       self.data['title']       = "#{author}"
       # Set the meta-description for this page.
       meta_description_prefix  = site.config['author_meta_description_prefix'] || 'author: '
-      self.data['description'] = "#{meta_description_prefix}#{author}"      
+      self.data['description'] = "#{meta_description_prefix}#{author}"
     end
 
   end
@@ -58,7 +58,7 @@ module Jekyll
     #
     #  +author_dir+ is the String path to the author folder.
     #  +author+     is the author currently being processed.
-    def write_author_index(author_dir, author)      
+    def write_author_index(author_dir, author)
       index = AuthorIndex.new(self, self.source, author_dir, author)
       index.render(self.layouts, site_payload)
       index.write(self.dest)
@@ -69,15 +69,21 @@ module Jekyll
 
     # Loops through the list of author pages and processes each one.
     def write_author_indexes
+      author_dirs_written = []
+
       if self.layouts.key? 'author_index'
-        dir = self.config['author_dir'] || 'authors'        
+        dir = self.config['author_dir'] || 'authors'
         self.posts.each do |post|
           post_authors = post.data["author"]
           if String.try_convert(post_authors)
                post_authors = [ post_authors ]
           end
-          post_authors.each do |author|              
-            self.write_author_index(File.join(dir, author.downcase.gsub(' ', '-')), author)
+          post_authors.each do |author|
+            author_dir = File.join(dir, author.downcase.gsub(' ', '-'))
+            if not author_dirs_written.include?(author_dir)
+              author_dirs_written.push(author_dir)
+              self.write_author_index(author_dir, author)
+            end
           end unless post_authors.nil?
         end
       # Throw an exception if the layout couldn't be found.
@@ -145,4 +151,3 @@ module Jekyll
   end
 
 end
-
