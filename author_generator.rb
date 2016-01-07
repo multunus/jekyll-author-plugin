@@ -72,14 +72,14 @@ module Jekyll
       author_dirs_written = []
 
       if Jekyll::VERSION < '3.0.0'
-        $post_collection = self.posts
+        post_docs = self.posts
       else 
-        $post_collection = self.posts.docs
+        post_docs = self.posts.docs
       end
 
       if self.layouts.key? 'author_index'
         dir = self.config['author_dir'] || 'authors'
-        $post_collection.each do |post|
+        post_docs.each do |post|
           post_authors = post.data["author"]
           if String.try_convert(post_authors)
                post_authors = [ post_authors ]
